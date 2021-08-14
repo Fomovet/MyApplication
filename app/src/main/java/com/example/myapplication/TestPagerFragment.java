@@ -1,14 +1,18 @@
 package com.example.myapplication;
 
-import android.os.Bundle;
+import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 
 import com.example.myapplication.databinding.FramgentTestPagerBinding;
-import com.github.fragivity.FragivityUtil;
+import com.navigation.androidx.Style;
 
-public class TestPagerFragment extends SwipeBackBaseFragment<FramgentTestPagerBinding>{
+public class TestPagerFragment extends BaseFragment<FramgentTestPagerBinding>{
     @Override
     protected void initEventAndData() {
-
-        System.out.println(getArguments().get("key"));
+        setTitle("界面一");
+        //System.out.println(getArguments().get("key"));
     }
+
+
 }

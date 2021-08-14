@@ -1,29 +1,30 @@
 package com.example.myapplication;
 
-import android.os.Bundle;
+import android.view.View;
 
 import com.example.myapplication.databinding.FramgentTestOneBinding;
-import com.github.fragivity.Fragivity;
-import com.github.fragivity.LaunchMode;
-import com.github.fragivity.NavOptionsBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestFragmentOne extends BaseFragment<FramgentTestOneBinding> {
 
 
     @Override
     protected void initEventAndData() {
+        setTitle("首页");
         mBinding.mText.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("key", "我传过来的数据");
-            Fragivity.of(this).push(TestPagerFragment.class, new NavOptionsBuilder()
-                    .setArguments(bundle)
-                    .setEnterAnim(R.anim.slide_in)
-                    .setExitAnim(R.anim.slide_out)
-                    .setPopEnterAnim(R.anim.slide_in_pop)
-                    .setPopExitAnim(R.anim.slide_out_pop)
-                    .setLaunchMode(LaunchMode.STANDARD)
-                    .build());
-
+            getNavigationFragment().pushFragment(new TestPagerFragment());
         });
+        //setOnclick(mBinding.mText,mBinding.mText);
+    }
+
+    private void setOnclick(View... views) {
+        ArrayList<View> view = new ArrayList<>(Arrays.asList(views));
+        for (View mView : view) {
+            mView.setOnClickListener(v -> {
+
+            });
+        }
     }
 }

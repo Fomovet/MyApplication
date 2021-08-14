@@ -17,22 +17,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
 
     private ArrayList<Fragment> fragments;
-    private FragmentHomeBinding mBinding;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mBinding = FragmentHomeBinding.inflate(getLayoutInflater());
-        return mBinding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void initEventAndData() {
         mBinding.mViewPager2.setAdapter(new MyAdapter(this));
         mBinding.mViewPager2.setUserInputEnabled(false);//设置不可滑动
 
@@ -58,12 +50,6 @@ public class HomeFragment extends Fragment {
                     break;
             }
         });
-    }
-
-    @Override
-    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
 

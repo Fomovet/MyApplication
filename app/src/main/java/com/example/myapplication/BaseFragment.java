@@ -7,22 +7,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
-import com.github.fragivity.Fragivity;
-import com.github.fragivity.swipeback.SwipeBackUtil;
+import com.navigation.androidx.AwesomeFragment;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
+public abstract class BaseFragment<T extends ViewBinding> extends AwesomeFragment {
     protected T mBinding;
 
 
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        mBinding = ViewBindingUtil.create(getClass(), LayoutInflater.from(getContext()));
+    public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+
+        mBinding = ViewBindingUtil.create(getClass(),inflater.from(getActivity()),container,false);
         return mBinding.getRoot();
     }
 
@@ -33,13 +31,6 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
     }
 
 
-
-
-    @Override
-    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     protected abstract void initEventAndData();
 
