@@ -1,19 +1,13 @@
 package com.example.myapplication;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioGroup;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.myapplication.adapter.NavIconType;
 import com.example.myapplication.databinding.FragmentHomeBinding;
+import com.github.fragivity.swipeback.SwipeBackUtil;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 

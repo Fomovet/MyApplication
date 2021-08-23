@@ -1,16 +1,13 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
-
-import androidx.annotation.NonNull;
-
+import com.example.myapplication.adapter.NavIconType;
 import com.example.myapplication.databinding.FramgentTestPagerBinding;
-import com.navigation.androidx.Style;
+import com.github.fragivity.swipeback.SwipeBackUtil;
 
-public class TestPagerFragment extends BaseFragment<FramgentTestPagerBinding>{
+public class TestPagerFragment extends BaseFragment<FramgentTestPagerBinding> {
     @Override
     protected void initEventAndData() {
-        setTitle("界面一");
+        SwipeBackUtil.setEnableGesture(this, true);
         //System.out.println(getArguments().get("key"));
     }
 

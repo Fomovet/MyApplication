@@ -1,15 +1,6 @@
 package com.example.myapplication;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.myapplication.databinding.FramgentTestOneBinding;
-import com.navigation.androidx.AwesomeFragment;
 
 /**
  * 该文件或类的作用 :

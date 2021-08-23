@@ -1,8 +1,13 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.view.View;
 
+import com.dylanc.loadinghelper.LoadingHelper;
+import com.example.myapplication.adapter.NavIconType;
 import com.example.myapplication.databinding.FramgentTestOneBinding;
+import com.github.fragivity.Fragivity;
+import com.github.fragivity.swipeback.SwipeBackUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,19 +17,14 @@ public class TestFragmentOne extends BaseFragment<FramgentTestOneBinding> {
 
     @Override
     protected void initEventAndData() {
-        setTitle("首页");
+
+        ToolbarUtils.setToolbar(getActivity(), this, "Fragment(empty)", NavIconType.NONE);
+        //setTitle("ces", NavIconType.NONE);
         mBinding.mText.setOnClickListener(v -> {
-            getNavigationFragment().pushFragment(new TestPagerFragment());
+            Fragivity.of(this).push(TestPagerFragment.class);
+            // startActivity(new Intent(mContext, TestActivity.class));
         });
-        //setOnclick(mBinding.mText,mBinding.mText);
+
     }
 
-    private void setOnclick(View... views) {
-        ArrayList<View> view = new ArrayList<>(Arrays.asList(views));
-        for (View mView : view) {
-            mView.setOnClickListener(v -> {
-
-            });
-        }
-    }
 }
