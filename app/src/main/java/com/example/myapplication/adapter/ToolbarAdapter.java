@@ -31,6 +31,7 @@ import androidx.fragment.app.Fragment;
 import com.dylanc.loadinghelper.LoadingHelper;
 import com.example.myapplication.R;
 import com.github.fragivity.Fragivity;
+import com.gyf.immersionbar.ImmersionBar;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +45,7 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
 
     private String title;
     private NavIconType type;
+    private Toolbar mToolbar;
     private int menuId;
     private Function1<? super MenuItem, Boolean> onMenuItemClick;
     private Fragment mFragment;
@@ -69,9 +71,10 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(@NotNull ViewHolder holder) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            holder.getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        if (holder.toolbar != null) {//设置沉浸式
+            ImmersionBar.with(mFragment).titleBar(holder.toolbar).init();
         }
+
 
         if (!TextUtils.isEmpty(title)) {
             holder.toolbar.setTitle(title);
@@ -80,8 +83,8 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
         if (type == NavIconType.BACK) {
             holder.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
             holder.toolbar.setNavigationOnClickListener(v -> {
-                //Fragivity.of(mFragment).pop();
-               holder.getActivity().finish();
+                Fragivity.of(mFragment).pop();
+                //holder.getActivity().finish();
             });
         } else {
             holder.toolbar.setNavigationIcon(null);
@@ -93,9 +96,9 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
         }
     }
 
-    static class ViewHolder extends LoadingHelper.ViewHolder {
+    public class ViewHolder extends LoadingHelper.ViewHolder {
 
-        private final Toolbar toolbar;
+        public Toolbar toolbar;
 
         ViewHolder(@NonNull View rootView) {
             super(rootView);
@@ -105,5 +108,9 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
         private Activity getActivity() {
             return (Activity) getRootView().getContext();
         }
+    }
+
+    public Toolbar getToolbar() {
+        return mToolbar;
     }
 }

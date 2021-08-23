@@ -20,14 +20,21 @@ import com.dylanc.viewbinding.base.ViewBindingUtil;
 import com.example.myapplication.adapter.NavIconType;
 import com.example.myapplication.adapter.ToolbarAdapter;
 
+
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.components.ImmersionFragment;
+
+
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseFragment<T extends ViewBinding> extends Fragment implements LoadingHelper.OnReloadListener {
+public abstract class BaseFragment<T extends ViewBinding> extends ImmersionFragment implements LoadingHelper.OnReloadListener {
     protected T mBinding;
 
     protected FragmentActivity mActivity;
     protected Context mContext;
     protected LoadingHelper loadingHelper;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -41,11 +48,22 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initEventAndData();
+        //initToolbar();
     }
 
+    private void initToolbar() {
+        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .statusBarColor(R.color.white)
+                .statusBarDarkFont(true, 0.2f)
+                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)//隐藏底部导航
+                .keyboardEnable(true).init();
+    }
+
+
     public void setTitle(String title, NavIconType type) {
-        loadingHelper.register(ViewType.TITLE, new ToolbarAdapter(this, title, type));
-        loadingHelper.setDecorHeader(ViewType.TITLE);
+        ToolbarAdapter mToolbarAdapter = new ToolbarAdapter(this, title, type);
+        loadingHelper.addChildDecorHeader(mToolbarAdapter);
     }
 
     @Override
@@ -68,5 +86,13 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment imple
 
     protected abstract void initEventAndData();
 
-
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .statusBarColor(R.color.white)
+                .statusBarDarkFont(true, 0.2f)
+                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)//隐藏底部导航
+                .keyboardEnable(true).init();
+    }
 }

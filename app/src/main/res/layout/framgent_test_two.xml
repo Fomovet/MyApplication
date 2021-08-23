@@ -9,9 +9,9 @@
 <!--    <androidx.appcompat.widget.Toolbar-->
 <!--        android:id="@+id/toolbar"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?actionBarSize"-->
-<!--        android:background="@color/btn1"-->
 <!--        android:elevation="1dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:background="@color/white"-->
 <!--        app:title="绿色标题栏" />-->
 
     <androidx.appcompat.widget.AppCompatButton
