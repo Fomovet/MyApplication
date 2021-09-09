@@ -21,6 +21,7 @@ import com.example.myapplication.adapter.NavIconType;
 import com.example.myapplication.adapter.ToolbarAdapter;
 
 
+import com.github.fragivity.swipeback.SwipeBackUtil;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.ImmersionFragment;
@@ -48,21 +49,21 @@ public abstract class BaseFragment<T extends ViewBinding> extends ImmersionFragm
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initEventAndData();
-        //initToolbar();
+
     }
 
     private void initToolbar() {
-        ImmersionBar.with(this)
-//                .fitsSystemWindows(true)
-//                .statusBarColor(R.color.white)
-                .statusBarDarkFont(true, 0.2f)
-                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)//隐藏底部导航
-                .keyboardEnable(true).init();
+//        ImmersionBar.with(this)
+////                .fitsSystemWindows(true)
+////                .statusBarColor(R.color.white)
+//                .statusBarDarkFont(true, 0.2f)
+//                .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)//隐藏底部导航
+//                .keyboardEnable(true).init();
     }
 
 
     public void setTitle(String title, NavIconType type) {
-        ToolbarAdapter mToolbarAdapter = new ToolbarAdapter(this, title, type);
+        ToolbarAdapter mToolbarAdapter = new ToolbarAdapter(getActivity(), title, type);
         loadingHelper.addChildDecorHeader(mToolbarAdapter);
     }
 

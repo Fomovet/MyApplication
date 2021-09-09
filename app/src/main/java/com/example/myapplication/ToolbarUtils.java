@@ -35,9 +35,9 @@ import kotlin.jvm.functions.Function1;
  */
 @SuppressWarnings("UnusedReturnValue")
 public class ToolbarUtils {
-    public static LoadingHelper setToolbar(Activity activity, Fragment fragment, String title, NavIconType type) {
+    public static LoadingHelper setToolbar(Activity activity, String title, NavIconType type) {
         LoadingHelper loadingHelper = new LoadingHelper(activity);
-        loadingHelper.register(ViewType.TITLE, new ToolbarAdapter(fragment, title, type));
+        //loadingHelper.register(ViewType.TITLE, new ToolbarAdapter(title, type));
         loadingHelper.setDecorHeader(ViewType.TITLE);
         return loadingHelper;
     }

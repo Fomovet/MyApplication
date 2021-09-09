@@ -24,5 +24,4 @@ public class TestFragmentOne extends BaseFragment<FramgentTestOneBinding> {
         });
 
     }
-
 }

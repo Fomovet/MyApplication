@@ -19,6 +19,6 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(FramgentTestPagerBinding.inflate(getLayoutInflater()).getRoot());
-        ToolbarUtils.setToolbar(this, null, "test", NavIconType.BACK);
+        //ToolbarUtils.setToolbar(this, null, "test", NavIconType.BACK);
     }
 }

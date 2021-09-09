@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +33,7 @@ import com.dylanc.loadinghelper.LoadingHelper;
 import com.example.myapplication.R;
 import com.github.fragivity.Fragivity;
 import com.gyf.immersionbar.ImmersionBar;
+import com.taoweiji.navigation.Ability;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -48,12 +50,13 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
     private Toolbar mToolbar;
     private int menuId;
     private Function1<? super MenuItem, Boolean> onMenuItemClick;
-    private Fragment mFragment;
+    private Activity activity;
 
-    public ToolbarAdapter(Fragment fragment, String title, NavIconType type) {
+
+    public ToolbarAdapter(Activity activity,String title, NavIconType type) {
         this.title = title;
         this.type = type;
-        this.mFragment = fragment;
+        this.activity = activity;
     }
 
     public ToolbarAdapter(String title, NavIconType type, int menuId, Function1<? super MenuItem, Boolean> onMenuItemClick) {
@@ -71,10 +74,9 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(@NotNull ViewHolder holder) {
-        if (holder.toolbar != null) {//设置沉浸式
-            ImmersionBar.with(mFragment).titleBar(holder.toolbar).init();
-        }
-
+        ImmersionBar.with(activity)
+                .titleBar(holder.toolbar)
+                .init();
 
         if (!TextUtils.isEmpty(title)) {
             holder.toolbar.setTitle(title);
@@ -83,16 +85,10 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
         if (type == NavIconType.BACK) {
             holder.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
             holder.toolbar.setNavigationOnClickListener(v -> {
-                Fragivity.of(mFragment).pop();
-                //holder.getActivity().finish();
+                mOnFinishListener.OnFinishListener();
             });
         } else {
             holder.toolbar.setNavigationIcon(null);
-        }
-
-        if (menuId > 0 && onMenuItemClick != null) {
-            holder.toolbar.inflateMenu(menuId);
-            holder.toolbar.setOnMenuItemClickListener(item -> onMenuItemClick.invoke(item));
         }
     }
 
@@ -112,5 +108,16 @@ public class ToolbarAdapter extends LoadingHelper.Adapter<ToolbarAdapter.ViewHol
 
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+
+    private OnFinishListener mOnFinishListener;
+
+    public interface OnFinishListener {
+        void OnFinishListener();
+    }
+
+    public void setOnFinishListener(OnFinishListener l) {
+        this.mOnFinishListener = l;
     }
 }
